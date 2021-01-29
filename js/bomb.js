@@ -30,11 +30,26 @@ let backgroundEl = null
 let timerEl = null
 function updateClock() {
     console.log("Countdown the timer!")
+    //decremnt time remaing, if no time left then end game
+    timeRemaining--;
+    if(timeRemaining <= 0) {
+        // console.log("Game over! Bomb exploded!")
+        endGame(false);
+    } 
+    timerEl.textContent = "00:00:" + timeRemaining;
 }
+
 //run to set up game
 function initializeGame() {
-        console.log("Set the game up!")
+    // console.log("Set the game up!")
+    timeRemaining = INITIAL_TIME
+    //set up remaing time variable
+    countdown = setInterval(updateClock, 1000) //runs updateclock() every second
+    //start countdown variable
 }
+
+
+
 //reset button
 let resetButtonEl = null
 
@@ -49,6 +64,19 @@ function cutWire(event) {
 //handle game over state
 function endGame(isGameWon) {
     console.log("END GAME")
+    //clearcount and update game over state var
+    clearInterval(countdown);
+    gameOver = true;
+
+    //If the game is won chant text to green
+    if(isGameWon) {
+        timerEl.style.color = "green"
+        console.log("Hooray! You're hero!")
+    } else {
+        console.log("Everyone is dead!")
+        backgroundEl.style.backgroundImage = "url(img/explosion.jpg)";
+    }
+    //if lost make background img change
 }
 /*----- event listeners -----*/
 // event listeners on the wires
@@ -65,4 +93,5 @@ document.addEventListener('DOMContentLoaded', function() {
     wireBoxEl = document.querySelector("#wireBox")
     wireBoxEl.addEventListener("click" , cutWire)
     wires = wireBoxEl.children
+    initializeGame()
 })
