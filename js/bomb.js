@@ -1,5 +1,6 @@
 /*----- constants -----*/
-const INITIAL_TIME = 30
+const INITIAL_TIME = 31
+
 
 /*----- app's state (variables) -----*/
 //var to store timer's countdown
@@ -56,10 +57,21 @@ let resetButtonEl = null
 //handles reset button click
 function resetGame() {
     console.log("Reset game!")
+    //update game over state & variable
+    gameOver = false
+    backgroundEl.style.backgroundImage = "url(img/simcity.jpg)";
+    //display simcity background
+    //set clock text back
+    timerEl.style.color = "red"
+    clearInterval(countdown);
+    //clear any intervals or timeouts
+    //invoke initalize game
+    initializeGame()
 }
 //handles reset button click
 function cutWire(event) {
     console.log("cut a wire!" , event);
+    //----> document.querySelector("#blue").innerHTML = "url(img/cut-blue-wire.png)"
 }
 //handle game over state
 function endGame(isGameWon) {
