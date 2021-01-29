@@ -30,3 +30,35 @@ main {
     justify-content: center;
     flex-direction: column; 
 }
+#timerBox {
+    border-style: solid;
+    height: 50px;
+    margin: 0px 20px 40px 20px;
+    background: black;
+    color: greenyellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#wireBox {
+    border-style: solid;
+    background-color: black;
+    color: greenyellow;
+    padding-top: 15px;
+}
+#reset {
+    box-shadow: 2px 6px 0px 1px #63911d;
+    background:linear-gradient(to bottom, #35c420 5%, #eaf038 100%);
+    background-color:#35c420;
+    border-radius:16px;
+    border:1px solid #abcf19;
+    display:inline-block;
+    cursor:pointer;
+    color:black;
+    font-family:'Courier New', Courier, monospace;
+    font-size:27px;
+    padding:11px 45px;
+    text-decoration:none;
+    margin-top: 40px;
+    }
+
