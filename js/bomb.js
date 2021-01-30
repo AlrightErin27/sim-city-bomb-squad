@@ -46,14 +46,28 @@ function initializeGame() {
     timeRemaining = INITIAL_TIME
     //set up remaing time variable
     countdown = setInterval(updateClock, 1000) //runs updateclock() every second
-    //start countdown variable
+    gameOver = false
+    wiresToCut = []
+    wireState = {
+        blue: false,
+        green: false,
+        red: false,
+        yellow: false,
+        white: false   
+    }
 }
-
-
-
 //reset button
 let resetButtonEl = null
 
+
+//randomly select what wires have to be cut
+for(const color in wireState) {
+    console.log(color)
+    let rand = Math.random() //gives us a radom # 0-1
+    if(rand > 0.5) {
+        wiresToCut.push(color);
+    }
+}
 //handles reset button click
 function resetGame() {
     console.log("Reset game!")
@@ -70,9 +84,35 @@ function resetGame() {
 }
 //handles reset button click
 function cutWire(event) {
-    console.log("cut a wire!" , event);
-    //----> document.querySelector("#blue").innerHTML = "url(img/cut-blue-wire.png)"
+    console.log(`You cut the ${wireColor} wire.`);
+    let wireColor = event.target.id;
+    if(!gameOver && wireState[wireColor] == false) {
+        console.log(event.target.src)
+        event.target.src = `img/cut- ${wireColor} -wire.png`
+        //cut the wire
+        wireState[wireColor] = true;
+        if(wiresToCut.includes(wireColor)) {
+            //that was the correct wire
+        wiresToCut.splice(wiresToCut.indexOf(wireColor), 1)
+        if(wiresToCut.length === 0){
+            endGame(true);
+        }
+        } else {
+            endGame(false);
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
 //handle game over state
 function endGame(isGameWon) {
     console.log("END GAME")
